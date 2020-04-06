@@ -1,4 +1,5 @@
 const usersRepo = require('./user.memory.repository');
+const taskService = require('../tasks/task.service');
 const idHelper = require('../../helpers/currentIdHelper');
 
 const getAll = () => usersRepo.getAll();
@@ -24,6 +25,7 @@ const updateUser = async (userId, reqBody) => {
 const deleteUser = async userId => {
   const currentUserIndex = idHelper(userId, usersRepo.USER_DATA);
   if (currentUserIndex !== null) {
+    await taskService.setUserIdAsNull(userId);
     return usersRepo.USER_DATA.splice(currentUserIndex, 1);
   }
   return null;
