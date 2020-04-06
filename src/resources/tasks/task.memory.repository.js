@@ -1,4 +1,4 @@
-const TASK_DATA = [
+let TASK_DATA = [
   {
     id: '447e73b2-e93d-440b-b587-04bbbbbb80149cba8e',
     title: 'Pavel',
@@ -28,6 +28,58 @@ const TASK_DATA = [
   }
 ];
 
-const getAll = async () => TASK_DATA;
+const getAllByBoardId = async boardId =>
+  TASK_DATA.filter(task => task.boardId === boardId);
 
-module.exports = { getAll, TASK_DATA };
+const getById = async (boardId, taskId) =>
+  TASK_DATA.filter(task => task.boardId === boardId).find(
+    task => task.id === taskId
+  );
+
+const addTask = async task => TASK_DATA.push(task);
+
+const updateTask = async (boardId, taskId, reqBody) => {
+  const currentTaskIndex = TASK_DATA.findIndex(
+    task => task.boardId === boardId && task.id === taskId
+  );
+  if (currentTaskIndex !== null && currentTaskIndex >= 0) {
+    const updatedTask = {
+      id: TASK_DATA[currentTaskIndex].id,
+      ...reqBody
+    };
+    TASK_DATA[currentTaskIndex] = updatedTask;
+    return updatedTask;
+  }
+  return null;
+};
+
+const deleteTask = async (boardId, taskId) => {
+  const currentTaskIndex = TASK_DATA.findIndex(
+    task => task.boardId === boardId && task.id === taskId
+  );
+  return currentTaskIndex !== null && currentTaskIndex >= 0
+    ? TASK_DATA.splice(currentTaskIndex, 1)
+    : null;
+};
+
+const setUserIdAsNull = async userId => {
+  TASK_DATA.forEach((task, index) => {
+    if (task.userId === userId) {
+      TASK_DATA[index].userId = null;
+    }
+  });
+};
+
+const deleteTaskIfBoardDeleted = async boardId => {
+  TASK_DATA = TASK_DATA.filter(task => task.boardId !== boardId);
+};
+
+module.exports = {
+  getAllByBoardId,
+  getById,
+  addTask,
+  updateTask,
+  deleteTask,
+  setUserIdAsNull,
+  deleteTaskIfBoardDeleted
+};

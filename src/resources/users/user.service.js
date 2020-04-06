@@ -1,34 +1,14 @@
 const usersRepo = require('./user.memory.repository');
-const taskService = require('../tasks/task.service');
-const idHelper = require('../../helpers/currentIdHelper');
 
-const getAll = () => usersRepo.getAll();
+const getAll = async () => usersRepo.getAll();
 
-const getById = async userId =>
-  usersRepo.USER_DATA.find(user => user.id === userId);
+const getById = async userId => usersRepo.getById(userId);
 
-const addUser = async user => usersRepo.USER_DATA.push(user);
+const addUser = async user => usersRepo.addUser(user);
 
-const updateUser = async (userId, reqBody) => {
-  const currentUserIndex = idHelper(userId, usersRepo.USER_DATA);
-  if (currentUserIndex !== null) {
-    const updatedUser = {
-      id: usersRepo.USER_DATA[currentUserIndex].id,
-      ...reqBody
-    };
-    usersRepo.USER_DATA[currentUserIndex] = updatedUser;
-    return updatedUser;
-  }
-  return null;
-};
+const updateUser = async (userId, reqBody) =>
+  usersRepo.updateUser(userId, reqBody);
 
-const deleteUser = async userId => {
-  const currentUserIndex = idHelper(userId, usersRepo.USER_DATA);
-  if (currentUserIndex !== null) {
-    await taskService.setUserIdAsNull(userId);
-    return usersRepo.USER_DATA.splice(currentUserIndex, 1);
-  }
-  return null;
-};
+const deleteUser = async userId => usersRepo.deleteUser(userId);
 
 module.exports = { getAll, getById, addUser, updateUser, deleteUser };

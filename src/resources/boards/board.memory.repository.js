@@ -1,3 +1,7 @@
+const idHelper = require('../../helpers/currentIdHelper');
+const idValidator = require('../../helpers/columnsIdValidator');
+const taskService = require('../tasks/task.service');
+
 const BOARD_DATA = [
   {
     id: '447e73b2-e93d-440b-bs587-0480149cba8e',
@@ -51,4 +55,49 @@ const BOARD_DATA = [
 
 const getAll = async () => BOARD_DATA;
 
-module.exports = { getAll, BOARD_DATA };
+const getById = async boardId => BOARD_DATA.find(board => board.id === boardId);
+
+const addBoard = async board => BOARD_DATA.push(board);
+
+const updateBoard = async (boardId, reqBody) => {
+  const currentBoardIndex = idHelper(boardId, BOARD_DATA);
+  const isColumnsIdValid = idValidator(reqBody.columns);
+  if (currentBoardIndex !== null && isColumnsIdValid) {
+    const updatedBoard = {
+      id: BOARD_DATA[currentBoardIndex].id,
+      title: reqBody.title,
+      columns: updateColumns(
+        BOARD_DATA[currentBoardIndex].columns,
+        reqBody.columns
+      )
+    };
+    BOARD_DATA[currentBoardIndex] = updatedBoard;
+    return updatedBoard;
+  }
+  return null;
+};
+
+const updateColumns = (columns, newColumns) => {
+  return columns.map(column => {
+    const columnIndex = idHelper(column.id, newColumns);
+    if (columnIndex !== null) {
+      return {
+        id: column.id,
+        title: newColumns[columnIndex].title,
+        order: newColumns[columnIndex].order
+      };
+    }
+    return column;
+  });
+};
+
+const deleteBoard = async boardId => {
+  const currentBoardIndex = idHelper(boardId, BOARD_DATA);
+  if (currentBoardIndex !== null) {
+    await taskService.deleteTaskIfBoardDeleted(boardId);
+    return BOARD_DATA.splice(currentBoardIndex, 1);
+  }
+  return null;
+};
+
+module.exports = { getAll, getById, addBoard, updateBoard, deleteBoard };
