@@ -1,0 +1,8 @@
+{"url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"info","message":"    Request logging"}
+{"statusCode":400,"statusText":"Bad Request","url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"error","message":"   Request Error"}
+{"url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"info","message":"    Request logging"}
+{"statusCode":400,"statusText":"Bad Request","url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"error","message":"   Request Error"}
+{"url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"info","message":"    Request logging"}
+{"statusCode":400,"statusText":"Bad Request","url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"error","message":"   Request Error"}
+{"url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"info","message":"    Request logging"}
+{"statusCode":400,"statusText":"Bad Request","url":"/boards/cvbcvb","method":"PUT","query":{},"body":{"id":"string","title":"string","columns":[{"id":"string","title":"string","order":0}]},"level":"error","message":"   Request Error"}

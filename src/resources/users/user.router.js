@@ -1,50 +1,81 @@
 const router = require('express').Router();
 const User = require('./user.model');
 const usersService = require('./user.service');
+const { ErrorHandler } = require('../../helpers/errorHandler');
+const {
+  BAD_REQUEST,
+  NOT_FOUND,
+  NO_CONTENT,
+  getStatusText
+} = require('http-status-codes');
 
-router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  await res.json(users.map(User.toResponse));
+router.route('/').get(async (req, res, next) => {
+  try {
+    const users = await usersService.getAll();
+    await res.json(users.map(User.toResponse));
+  } catch (error) {
+    return next(error);
+  }
 });
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:id').get(async (req, res, next) => {
   const user = await usersService.getById(req.params.id);
-  if (!user) {
-    await res
-      .status(404)
-      .json({ message: `User with id ${req.params.id} not found` });
-  } else {
-    await res.json(User.toResponse(user));
+  try {
+    if (!user) {
+      throw new ErrorHandler(
+        NOT_FOUND,
+        `User with id ${req.params.id} not found`
+      );
+    } else {
+      await res.json(User.toResponse(user));
+    }
+  } catch (error) {
+    return next(error);
   }
 });
 
-router.route('/').post(async (req, res) => {
-  if (!req.body.name || !req.body.login || !req.body.password) {
-    await res.status(400).json({ message: 'Bad request' });
-  } else {
-    const newUser = new User(req.body);
-    await usersService.addUser(newUser);
-    await res.json(User.toResponse(newUser));
+router.route('/').post(async (req, res, next) => {
+  try {
+    if (!req.body.name || !req.body.login || !req.body.password) {
+      throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
+    } else {
+      const newUser = new User(req.body);
+      await usersService.addUser(newUser);
+      await res.json(User.toResponse(newUser));
+    }
+  } catch (error) {
+    return next(error);
   }
 });
 
-router.route('/:id').put(async (req, res) => {
-  const user = await usersService.updateUser(req.params.id, req.body);
-  if (!req.body.name || !req.body.login || !req.body.password || !user) {
-    await res.status(400).json({ message: 'Bad request' });
-  } else {
-    await res.json(User.toResponse(user));
+router.route('/:id').put(async (req, res, next) => {
+  try {
+    const user = await usersService.updateUser(req.params.id, req.body);
+    if (!req.body.name || !req.body.login || !req.body.password || !user) {
+      throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
+    } else {
+      await res.json(User.toResponse(user));
+    }
+  } catch (error) {
+    return next(error);
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
-  const deletedUser = await usersService.deleteUser(req.params.id);
-  if (deletedUser === null) {
-    await res
-      .status(404)
-      .json({ message: `User with id ${req.params.id} not found` });
-  } else {
-    await res.status(204).json({ message: 'The user has been deleted' });
+router.route('/:id').delete(async (req, res, next) => {
+  try {
+    const deletedUser = await usersService.deleteUser(req.params.id);
+    if (deletedUser === null) {
+      throw new ErrorHandler(
+        NOT_FOUND,
+        `User with id ${req.params.id} not found`
+      );
+    } else {
+      await res
+        .status(NO_CONTENT)
+        .json({ message: 'The user has been deleted' });
+    }
+  } catch (error) {
+    return next(error);
   }
 });
 
