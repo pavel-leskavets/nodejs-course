@@ -16,11 +16,11 @@ const logger = createLogger({
       filename: path.join(__dirname, '../logs/info.log'),
       level: 'info',
       format: format.combine(format.uncolorize(), format.json())
-    }),
+    })
+  ],
+  exceptionHandlers: [
     new transports.File({
-      handleExceptions: true,
       filename: path.join(__dirname, '../logs/exceptions.log'),
-      level: 'error',
       format: format.combine(format.uncolorize(), format.json())
     })
   ]
