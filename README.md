@@ -1,5 +1,8 @@
 # RS School REST service
 
+> В репозитории добавлены моковые данные для users, boards, tasks которые не влияют на прохождение тестов. Вы можете оставить массивы с данными пустыми во время запуска тестов, если пожелаете. При возникновении каких-либо вопросов можно написать мне в telegram 
+[Pavel Leskavets](https://t.me/jake_epping)
+
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
