@@ -51,6 +51,7 @@ router.route('/').post(async (req, res, next) => {
 router.route('/:id').put(async (req, res, next) => {
   try {
     const user = await usersService.updateUser(req.params.id, req.body);
+    console.log(user, 'fdfdfd');
     if (!req.body.name || !req.body.login || !req.body.password || !user) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
@@ -64,7 +65,7 @@ router.route('/:id').put(async (req, res, next) => {
 router.route('/:id').delete(async (req, res, next) => {
   try {
     const deletedUser = await usersService.deleteUser(req.params.id);
-    if (deletedUser === null) {
+    if (!deletedUser) {
       throw new ErrorHandler(
         NOT_FOUND,
         `User with id ${req.params.id} not found`

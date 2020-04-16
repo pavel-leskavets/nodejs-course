@@ -13,7 +13,7 @@ const {
 router.route('/').get(async (req, res, next) => {
   try {
     const boards = await boardService.getAll();
-    await res.json(boards);
+    await res.json(boards.map(Board.toResponse));
   } catch (error) {
     return next(error);
   }
@@ -28,7 +28,7 @@ router.route('/:id').get(async (req, res, next) => {
         `Board with id ${req.params.id} not found`
       );
     } else {
-      await res.json(board);
+      await res.json(Board.toResponse(board));
     }
   } catch (error) {
     return next(error);
@@ -43,7 +43,7 @@ router.route('/').post(async (req, res, next) => {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
       const newBoard = new Board(req.body);
-      await boardService.addBoard(newBoard);
+      await boardService.addBoard(Board.toResponse(newBoard));
       await res.json(newBoard);
     }
   } catch (error) {
@@ -59,7 +59,7 @@ router.route('/:id').put(async (req, res, next) => {
     if (!title || !columns || !isColumnsValid || !board) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
-      await res.json(board);
+      await res.json(Board.toResponse(board));
     }
   } catch (error) {
     return next(error);
