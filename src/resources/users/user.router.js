@@ -8,6 +8,8 @@ const {
   NO_CONTENT,
   getStatusText
 } = require('http-status-codes');
+const { userBodyValidation } = require('../../validators/validators');
+const { validationResult } = require('express-validator');
 
 router.route('/').get(async (req, res, next) => {
   try {
@@ -34,9 +36,10 @@ router.route('/:id').get(async (req, res, next) => {
   }
 });
 
-router.route('/').post(async (req, res, next) => {
+router.route('/').post(userBodyValidation(), async (req, res, next) => {
   try {
-    if (!req.body.name || !req.body.login || !req.body.password) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
       const newUser = new User(req.body);
@@ -48,11 +51,11 @@ router.route('/').post(async (req, res, next) => {
   }
 });
 
-router.route('/:id').put(async (req, res, next) => {
+router.route('/:id').put(userBodyValidation(), async (req, res, next) => {
   try {
+    const errors = validationResult(req);
     const user = await usersService.updateUser(req.params.id, req.body);
-    console.log(user, 'fdfdfd');
-    if (!req.body.name || !req.body.login || !req.body.password || !user) {
+    if (!errors.isEmpty() || !user) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
       await res.json(User.toResponse(user));

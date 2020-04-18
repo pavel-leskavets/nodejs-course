@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const boardService = require('./board.service');
 const Board = require('./board.model');
-const columnsValidator = require('../../helpers/columnsValidator');
 const { ErrorHandler } = require('../../helpers/errorHandler');
 const {
   BAD_REQUEST,
@@ -9,6 +8,8 @@ const {
   NO_CONTENT,
   getStatusText
 } = require('http-status-codes');
+const { validationResult } = require('express-validator');
+const { boardBodyValidation } = require('../../validators/validators');
 
 router.route('/').get(async (req, res, next) => {
   try {
@@ -35,28 +36,26 @@ router.route('/:id').get(async (req, res, next) => {
   }
 });
 
-router.route('/').post(async (req, res, next) => {
+router.route('/').post(boardBodyValidation(), async (req, res, next) => {
   try {
-    const { title, columns } = req.body;
-    const isColumnsValid = columnsValidator(columns);
-    if (!title || !columns || !isColumnsValid) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
       const newBoard = new Board(req.body);
-      await boardService.addBoard(Board.toResponse(newBoard));
-      await res.json(newBoard);
+      await boardService.addBoard(newBoard);
+      await res.json(Board.toResponse(newBoard));
     }
   } catch (error) {
     return next(error);
   }
 });
 
-router.route('/:id').put(async (req, res, next) => {
+router.route('/:id').put(boardBodyValidation(), async (req, res, next) => {
   try {
-    const { title, columns } = req.body;
-    const isColumnsValid = columnsValidator(columns);
+    const errors = validationResult(req);
     const board = await boardService.updateBoard(req.params.id, req.body);
-    if (!title || !columns || !isColumnsValid || !board) {
+    if (!errors.isEmpty() || !board) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
       await res.json(Board.toResponse(board));

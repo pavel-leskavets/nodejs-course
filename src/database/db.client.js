@@ -10,6 +10,7 @@ module.exports = callback => {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error'));
   db.once('open', () => {
+    db.dropDatabase();
     console.log('We are connected');
     callback();
   });

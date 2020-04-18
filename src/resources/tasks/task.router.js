@@ -8,6 +8,8 @@ const {
   NO_CONTENT,
   getStatusText
 } = require('http-status-codes');
+const { validationResult } = require('express-validator');
+const { taskBodyValidation } = require('../../validators/validators');
 
 router.route('/:boardId/tasks').get(async (req, res, next) => {
   try {
@@ -18,7 +20,7 @@ router.route('/:boardId/tasks').get(async (req, res, next) => {
         `Task with id ${req.params.boardId} not found`
       );
     } else {
-      await res.json(tasks);
+      await res.json(tasks.map(Task.toResponse));
     }
   } catch (error) {
     return next(error);
@@ -37,56 +39,44 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res, next) => {
         `Task with id ${req.params.boardId} not found`
       );
     } else {
-      await res.json(task);
+      await res.json(Task.toResponse(task));
     }
   } catch (error) {
     return next(error);
   }
 });
 
-router.route('/:boardId/tasks').post(async (req, res, next) => {
-  try {
-    const { title, order, description, userId, boardId } = req.body;
-    if (
-      !title ||
-      order === undefined ||
-      !description ||
-      userId === undefined ||
-      boardId === undefined
-    ) {
-      throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
-    } else {
-      const reqBody = { ...req.body };
-      reqBody.boardId = req.params.boardId;
-      const newTask = new Task(reqBody);
-      await taskService.addTask(newTask);
-      await res.json(newTask);
+router
+  .route('/:boardId/tasks')
+  .post(taskBodyValidation(), async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
+      } else {
+        const reqBody = { ...req.body };
+        reqBody.boardId = req.params.boardId;
+        const newTask = new Task(reqBody);
+        await taskService.addTask(newTask);
+        await res.json(Task.toResponse(newTask));
+      }
+    } catch (error) {
+      return next(error);
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  });
 
 router.route('/:boardId/tasks/:taskId').put(async (req, res, next) => {
   try {
-    const { title, order, description, userId, boardId, columnId } = req.body;
+    const errors = validationResult(req);
     const task = await taskService.updateTask(
       req.params.boardId,
       req.params.taskId,
       req.body
     );
-    if (
-      !title ||
-      order === undefined ||
-      !description ||
-      userId === undefined ||
-      boardId === undefined ||
-      columnId === undefined ||
-      !task
-    ) {
+    if (!errors.isEmpty() || !task) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
     } else {
-      await res.json(task);
+      await res.json(Task.toResponse(task));
     }
   } catch (error) {
     return next(error);
@@ -99,7 +89,7 @@ router.route('/:boardId/tasks/:taskId').delete(async (req, res, next) => {
       req.params.boardId,
       req.params.taskId
     );
-    if (deletedTask === null) {
+    if (!deletedTask) {
       throw new ErrorHandler(
         NOT_FOUND,
         `User with id ${req.params.boardId} not found`
