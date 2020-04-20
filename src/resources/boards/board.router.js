@@ -68,7 +68,7 @@ router.route('/:id').put(boardBodyValidation(), async (req, res, next) => {
 router.route('/:id').delete(async (req, res, next) => {
   try {
     const deletedBoard = await boardService.deleteBoard(req.params.id);
-    if (deletedBoard === null) {
+    if (!deletedBoard) {
       throw new ErrorHandler(
         NOT_FOUND,
         `Board with id ${req.params.id} not found`
