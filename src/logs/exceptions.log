@@ -970,3 +970,342 @@ SyntaxError: Unexpected token '.'
     at require (internal/modules/cjs/helpers.js:77:18)
     at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:5:20)
     at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: listen EADDRINUSE: address already in use :::4000
+Error: listen EADDRINUSE: address already in use :::4000
+    at Server.setupListenHandle [as _listen2] (net.js:1309:16)
+    at listenInCluster (net.js:1357:12)
+    at Server.listen (net.js:1445:7)
+    at Function.listen (D:\Учёба\node3\nodejs-course\node_modules\express\lib\application.js:618:24)
+    at D:\Учёба\node3\nodejs-course\src\server.js:14:7
+    at NativeConnection.<anonymous> (D:\Учёба\node3\nodejs-course\src\database\db.client.js:15:5)
+    at Object.onceWrapper (events.js:417:28)
+    at NativeConnection.emit (events.js:311:20)
+    at D:\Учёба\node3\nodejs-course\node_modules\mongoose\lib\connection.js:819:13
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\utils.js:731:5
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\mongo_client.js:217:7
+    at connectCallback (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\operations\connect.js:350:5)
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\operations\connect.js:586:5
+    at Object.callback (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:297:43)
+    at processWaitQueue (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:1036:21)
+    at NativeTopology.serverUpdateHandler (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:554:7)
+[31m[31merror[31m[39m:   uncaughtException: Cannot find module './board.db.repository'
+Require stack:
+- D:\Учёба\node3\nodejs-course\src\resources\boards\board.service.js
+- D:\Учёба\node3\nodejs-course\src\resources\boards\board.router.js
+- D:\Учёба\node3\nodejs-course\src\app.js
+- D:\Учёба\node3\nodejs-course\src\server.js
+Error: Cannot find module './board.db.repository'
+Require stack:
+- D:\Учёба\node3\nodejs-course\src\resources\boards\board.service.js
+- D:\Учёба\node3\nodejs-course\src\resources\boards\board.router.js
+- D:\Учёба\node3\nodejs-course\src\app.js
+- D:\Учёба\node3\nodejs-course\src\server.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:982:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:864:27)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\resources\boards\board.service.js:1:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\resources\boards\board.router.js:2:22)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+[31m[31merror[31m[39m:   uncaughtException: Cannot read property 'headers' of undefined
+TypeError: Cannot read property 'headers' of undefined
+    at module.exports (D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:6:21)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:36:19)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:74:12)
+    at internal/main/run_main_module.js:18:47
+[31m[31merror[31m[39m:   uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:36:30)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:74:12)
+    at internal/main/run_main_module.js:18:47
+[31m[31merror[31m[39m:   uncaughtException: missing ) after argument list
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:10
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err: any, user: any) => {
+                                ^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: missing ) after argument list
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:7
+  console.log(token;
+              ^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token ';'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:6
+  const token = req.header.;
+                           ^
+
+SyntaxError: Unexpected token ';'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token '{'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\login.router.js:14
+    const token = jwt.sign({{login: user.login}}, JWT_SECRET_KEY, {
+                            ^
+
+SyntaxError: Unexpected token '{'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:8:21)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected identifier
+D:\Учёба\node3\nodejs-course\src\resources\authentication\login.router.js:17
+    return res.header()json({ user, token });
+                       ^^^^
+
+SyntaxError: Unexpected identifier
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:8:21)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: User.save is not a function
+TypeError: User.save is not a function
+    at NativeConnection.<anonymous> (D:\Учёба\node3\nodejs-course\src\database\db.client.js:15:10)
+    at Object.onceWrapper (events.js:417:28)
+    at NativeConnection.emit (events.js:311:20)
+    at D:\Учёба\node3\nodejs-course\node_modules\mongoose\lib\connection.js:819:13
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\utils.js:731:5
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\mongo_client.js:217:7
+    at connectCallback (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\operations\connect.js:350:5)
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\operations\connect.js:586:5
+    at Object.callback (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:297:43)
+    at processWaitQueue (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:1036:21)
+    at NativeTopology.serverUpdateHandler (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\topology.js:554:7)
+    at Server.emit (events.js:311:20)
+    at Monitor.<anonymous> (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\server.js:147:12)
+    at Monitor.emit (events.js:323:22)
+    at successHandler (D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\monitor.js:154:13)
+    at D:\Учёба\node3\nodejs-course\node_modules\mongodb\lib\core\sdam\monitor.js:196:5
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token 'else'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:11
+      else {
+      ^^^^
+
+SyntaxError: Unexpected token 'else'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:10:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token 'return'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:11
+          return next();
+          ^^^^^^
+
+SyntaxError: Unexpected token 'return'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:10:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token 'return'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\jwt\checkToken.js:11
+      return next();
+      ^^^^^^
+
+SyntaxError: Unexpected token 'return'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:10:20)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\server.js:2:13)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Missing initializer in const declaration
+D:\Учёба\node3\nodejs-course\src\resources\authentication\login.service.js:5
+  const isPasswordsMatch
+        ^^^^^^^^^^^^^^^^
+
+SyntaxError: Missing initializer in const declaration
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\resources\authentication\login.router.js:2:22)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:21)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: Unexpected token '}'
+D:\Учёба\node3\nodejs-course\src\resources\authentication\login.service.js:7
+} loginRepo.getUserByLogin(login);
+^
+
+SyntaxError: Unexpected token '}'
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\resources\authentication\login.router.js:2:22)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:21)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+[31m[31merror[31m[39m:   uncaughtException: missing ) after argument list
+D:\Учёба\node3\nodejs-course\src\resources\authentication\login.service.js:9
+      user.password
+           ^^^^^^^^
+
+SyntaxError: missing ) after argument list
+    at wrapSafe (internal/modules/cjs/loader.js:1072:16)
+    at Module._compile (internal/modules/cjs/loader.js:1122:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\resources\authentication\login.router.js:2:22)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1178:10)
+    at Module.load (internal/modules/cjs/loader.js:1002:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:901:14)
+    at Module.require (internal/modules/cjs/loader.js:1044:19)
+    at require (internal/modules/cjs/helpers.js:77:18)
+    at Object.<anonymous> (D:\Учёба\node3\nodejs-course\src\app.js:9:21)
+    at Module._compile (internal/modules/cjs/loader.js:1158:30)

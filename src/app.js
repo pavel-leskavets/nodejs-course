@@ -2,9 +2,12 @@ const express = require('express');
 const swaggerUI = require('swagger-ui-express');
 const path = require('path');
 const YAML = require('yamljs');
+const { NOT_FOUND, getStatusText } = require('http-status-codes');
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
 const taskRouter = require('./resources/tasks/task.router');
+const loginRouter = require('./resources/authentication/login.router');
+const checkToken = require('./resources/authentication/jwt/checkToken');
 const { requestLoggerMiddleware } = require('./loggers/logger');
 const {
   handleError,
@@ -29,11 +32,18 @@ app.use('/', (req, res, next) => {
 
 app.use(requestLoggerMiddleware);
 
-app.use('/users', userRouter);
+app.use('/login', loginRouter);
 
-app.use('/boards', boardRouter);
+app.use('/users', checkToken, userRouter);
 
-app.use('/boards', taskRouter);
+app.use('/boards', checkToken, boardRouter);
+
+app.use('/boards', checkToken, taskRouter);
+
+app.use('/*', async (req, res, next) => {
+  await res.status(NOT_FOUND).json({ message: getStatusText(NOT_FOUND) });
+  next();
+});
 
 app.use((err, req, res, next) => {
   if (err instanceof ErrorHandler) {
