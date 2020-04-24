@@ -1,13 +1,19 @@
 const router = require('express').Router();
 const loginService = require('./login.service');
-const { FORBIDDEN, getStatusText } = require('http-status-codes');
+const { FORBIDDEN, BAD_REQUEST, getStatusText } = require('http-status-codes');
 const { JWT_SECRET_KEY, TOKEN_EXPIRES } = require('../../common/config');
 const jwt = require('jsonwebtoken');
 const { ErrorHandler } = require('../../helpers/errorHandler');
+const { validationResult } = require('express-validator');
+const { loginBodyValidation } = require('../../validators/validators');
 
-router.post('/', async (req, res, next) => {
-  const user = await loginService.getUserByLogin(req.body);
+router.post('/', loginBodyValidation(), async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
+    }
+    const user = await loginService.getUserByLogin(req.body);
     if (!user) {
       throw new ErrorHandler(FORBIDDEN, getStatusText(FORBIDDEN));
     } else {

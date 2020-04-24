@@ -11,7 +11,6 @@ module.exports = callback => {
   const db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error'));
   db.once('open', () => {
-    // db.dropDatabase();
     User.create({ name: 'admin', login: 'admin', password: 'admin' });
     console.log('We are connected');
     callback();

@@ -26,8 +26,16 @@ const taskBodyValidation = () => {
   ];
 };
 
+const loginBodyValidation = () => {
+  return [
+    check('login', 'login is not passed').exists(),
+    check('password', 'password is not passed').exists()
+  ];
+};
+
 module.exports = {
   userBodyValidation,
   boardBodyValidation,
-  taskBodyValidation
+  taskBodyValidation,
+  loginBodyValidation
 };
