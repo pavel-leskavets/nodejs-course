@@ -6,9 +6,12 @@ const jwt = require('jsonwebtoken');
 const { ErrorHandler } = require('../../helpers/errorHandler');
 const { validationResult } = require('express-validator');
 const { loginBodyValidation } = require('../../validators/validators');
+const catchErrors = require('../../helpers/catchErrors');
 
-router.post('/', loginBodyValidation(), async (req, res, next) => {
-  try {
+router.post(
+  '/',
+  loginBodyValidation(),
+  catchErrors(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
@@ -26,9 +29,7 @@ router.post('/', loginBodyValidation(), async (req, res, next) => {
       );
       return await res.json({ token });
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Task = require('./task.model');
 const taskService = require('./task.service');
+const catchErrors = require('../../helpers/catchErrors');
 const { ErrorHandler } = require('../../helpers/errorHandler');
 const {
   BAD_REQUEST,
@@ -11,8 +12,8 @@ const {
 const { validationResult } = require('express-validator');
 const { taskBodyValidation } = require('../../validators/validators');
 
-router.route('/:boardId/tasks').get(async (req, res, next) => {
-  try {
+router.route('/:boardId/tasks').get(
+  catchErrors(async (req, res) => {
     const tasks = await taskService.getAllByBoardId(req.params.boardId);
     if (tasks && !tasks.length) {
       throw new ErrorHandler(
@@ -22,13 +23,11 @@ router.route('/:boardId/tasks').get(async (req, res, next) => {
     } else {
       await res.json(tasks.map(Task.toResponse));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/:boardId/tasks/:taskId').get(async (req, res, next) => {
-  try {
+router.route('/:boardId/tasks/:taskId').get(
+  catchErrors(async (req, res) => {
     const task = await taskService.getById(
       req.params.boardId,
       req.params.taskId
@@ -41,32 +40,27 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res, next) => {
     } else {
       await res.json(Task.toResponse(task));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router
-  .route('/:boardId/tasks')
-  .post(taskBodyValidation(), async (req, res, next) => {
-    try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
-      } else {
-        const reqBody = { ...req.body };
-        reqBody.boardId = req.params.boardId;
-        const newTask = new Task(reqBody);
-        await taskService.addTask(newTask);
-        await res.json(Task.toResponse(newTask));
-      }
-    } catch (error) {
-      return next(error);
+router.route('/:boardId/tasks').post(
+  taskBodyValidation(),
+  catchErrors(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
+    } else {
+      const reqBody = { ...req.body };
+      reqBody.boardId = req.params.boardId;
+      const newTask = new Task(reqBody);
+      await taskService.addTask(newTask);
+      await res.json(Task.toResponse(newTask));
     }
-  });
+  })
+);
 
-router.route('/:boardId/tasks/:taskId').put(async (req, res, next) => {
-  try {
+router.route('/:boardId/tasks/:taskId').put(
+  catchErrors(async (req, res) => {
     const errors = validationResult(req);
     const task = await taskService.updateTask(
       req.params.boardId,
@@ -78,13 +72,11 @@ router.route('/:boardId/tasks/:taskId').put(async (req, res, next) => {
     } else {
       await res.json(Task.toResponse(task));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/:boardId/tasks/:taskId').delete(async (req, res, next) => {
-  try {
+router.route('/:boardId/tasks/:taskId').delete(
+  catchErrors(async (req, res) => {
     const deletedTask = await taskService.deleteTask(
       req.params.boardId,
       req.params.taskId
@@ -99,9 +91,7 @@ router.route('/:boardId/tasks/:taskId').delete(async (req, res, next) => {
         .status(NO_CONTENT)
         .json({ message: 'The task has been deleted' });
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

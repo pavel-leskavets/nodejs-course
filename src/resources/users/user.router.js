@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('./user.model');
 const usersService = require('./user.service');
+const catchErrors = require('../../helpers/catchErrors');
 const { ErrorHandler } = require('../../helpers/errorHandler');
 const {
   BAD_REQUEST,
@@ -11,18 +12,16 @@ const {
 const { userBodyValidation } = require('../../validators/validators');
 const { validationResult } = require('express-validator');
 
-router.route('/').get(async (req, res, next) => {
-  try {
+router.route('/').get(
+  catchErrors(async (req, res) => {
     const users = await usersService.getAll();
     await res.json(users.map(User.toResponse));
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/:id').get(async (req, res, next) => {
-  const user = await usersService.getById(req.params.id);
-  try {
+router.route('/:id').get(
+  catchErrors(async (req, res) => {
+    const user = await usersService.getById(req.params.id);
     if (!user) {
       throw new ErrorHandler(
         NOT_FOUND,
@@ -31,13 +30,12 @@ router.route('/:id').get(async (req, res, next) => {
     } else {
       await res.json(User.toResponse(user));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/').post(userBodyValidation(), async (req, res, next) => {
-  try {
+router.route('/').post(
+  userBodyValidation(),
+  catchErrors(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new ErrorHandler(BAD_REQUEST, getStatusText(BAD_REQUEST));
@@ -46,13 +44,12 @@ router.route('/').post(userBodyValidation(), async (req, res, next) => {
       await usersService.addUser(newUser);
       await res.json(User.toResponse(newUser));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/:id').put(userBodyValidation(), async (req, res, next) => {
-  try {
+router.route('/:id').put(
+  userBodyValidation(),
+  catchErrors(async (req, res) => {
     const errors = validationResult(req);
     const user = await usersService.updateUser(req.params.id, req.body);
     if (!errors.isEmpty() || !user) {
@@ -60,13 +57,11 @@ router.route('/:id').put(userBodyValidation(), async (req, res, next) => {
     } else {
       await res.json(User.toResponse(user));
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
-router.route('/:id').delete(async (req, res, next) => {
-  try {
+router.route('/:id').delete(
+  catchErrors(async (req, res) => {
     const deletedUser = await usersService.deleteUser(req.params.id);
     if (!deletedUser) {
       throw new ErrorHandler(
@@ -78,9 +73,7 @@ router.route('/:id').delete(async (req, res, next) => {
         .status(NO_CONTENT)
         .json({ message: 'The user has been deleted' });
     }
-  } catch (error) {
-    return next(error);
-  }
-});
+  })
+);
 
 module.exports = router;

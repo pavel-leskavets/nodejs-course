@@ -1,5 +1,5 @@
 const usersRepo = require('./user.db');
-const tasksRepo = require('../tasks/task.db.repository');
+const tasksRepo = require('../tasks/task.db');
 
 const getAll = async () => usersRepo.getAll();
 
